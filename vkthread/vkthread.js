@@ -92,8 +92,13 @@
 
         if (param.cb && typeof param.cb === 'function') {
           worker.onmessage = function (oEvent) {
-            param.cb(oEvent.data);
-            worker.terminate();
+              if (typeof (oEvent.data.msg) !== "undefined") {
+                  if (param.onmsg && typeof param.onmsg === 'function')
+                      param.onmsg(oEvent.data.msg);
+              } else {
+                  param.cb(oEvent.data);
+                  worker.terminate();
+              }
           };
 
           worker.onerror = function(error) {
