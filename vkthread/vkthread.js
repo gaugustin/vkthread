@@ -154,7 +154,10 @@
     );
   };
 
-  window.vkthread = new Vkthread();
-
+    // export as AMD module / Node module / browser or worker variable
+  if (typeof define === 'function' && define.amd) define(function () { return new Vkthread(); });
+  else if (typeof module !== 'undefined') module.exports = new Vkthread();
+  else if (typeof self !== 'undefined') self.vkthread = new Vkthread();
+  else window.vkthread = new Vkthread();
 }());
 
