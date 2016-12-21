@@ -92,7 +92,7 @@
 
         if (param.cb && typeof param.cb === 'function') {
           worker.onmessage = function (oEvent) {
-              if (typeof (oEvent.data.msg) !== "undefined") {
+              if (typeof (oEvent.data) !== "undefined" && typeof (oEvent.data.msg) !== "undefined") {
                   if (param.onmsg && typeof param.onmsg === 'function')
                       param.onmsg(oEvent.data.msg);
               } else {
